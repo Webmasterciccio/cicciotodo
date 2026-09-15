@@ -1,0 +1,30 @@
+# Blocco da AGGIUNGERE al Caddyfile GIA' ESISTENTE sulla VM (quello di
+# CiccioTV), non un file a se stante: Caddy serve piu' domini dallo stesso
+# Caddyfile con piu' site block.
+#
+#   sudo nano /etc/caddy/Caddyfile   # incolla questo blocco sotto quello di cicciotv
+#   sudo systemctl restart caddy
+#
+# Sostituisci:
+#  - cicciotodo.duckdns.org  col sottodominio DuckDNS creato per questo progetto
+#  - la mail in "tls"         con la tua (per gli avvisi Let's Encrypt)
+#  - /home/ubuntu/cicciotodo/frontend/dist  col percorso reale del sito buildato
+
+cicciotodo.duckdns.org {
+	tls ciccio.a97@gmail.com
+
+	# Le chiamate API del frontend vanno a /api/... : qui togliamo il prefisso
+	# "/api" e le giriamo al backend FastAPI in ascolto solo su localhost:8001
+	# (diversa dalla porta 8000 usata da cicciotv, sulla stessa VM).
+	handle_path /api/* {
+		reverse_proxy 127.0.0.1:8001
+	}
+
+	# Tutto il resto e' il sito React (Single Page App): i file statici buildati,
+	# con fallback su index.html per le rotte lato client.
+	handle {
+		root * /home/ubuntu/cicciotodo/frontend/dist
+		try_files {path} /index.html
+		file_server
+	}
+}
