@@ -5,7 +5,7 @@ from app import crud, schemas
 from app.database import get_db
 from app.deps import get_current_owner_id
 
-router = APIRouter(prefix="/api/tags", tags=["tags"])
+router = APIRouter(prefix="/tags", tags=["tags"])
 
 
 @router.get("", response_model=list[schemas.TagOut])

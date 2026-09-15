@@ -5,7 +5,7 @@ from app import crud, schemas
 from app.database import get_db
 from app.deps import get_current_owner_id
 
-router = APIRouter(prefix="/api/categories", tags=["categories"])
+router = APIRouter(prefix="/categories", tags=["categories"])
 
 
 @router.get("", response_model=list[schemas.CategoryOut])

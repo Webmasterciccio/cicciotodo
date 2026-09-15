@@ -7,7 +7,7 @@ from app import crud, schemas
 from app.database import get_db
 from app.deps import get_current_owner_id
 
-router = APIRouter(prefix="/api/tasks", tags=["tasks"])
+router = APIRouter(prefix="/tasks", tags=["tasks"])
 
 
 def _get_owned_task(db: Session, owner_id: int, task_id: int):

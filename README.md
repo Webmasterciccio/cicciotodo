@@ -53,7 +53,7 @@ npm run dev
 
 Apri **http://localhost:5173**.
 
-Per puntare a un backend diverso da `http://127.0.0.1:8001/api`, copia
+Per puntare a un backend diverso da `http://127.0.0.1:8001`, copia
 `frontend/.env.example` in `frontend/.env` e modifica `VITE_API_BASE_URL`.
 
 ## Funzionalita'
